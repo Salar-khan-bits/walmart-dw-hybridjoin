@@ -53,7 +53,7 @@ graph TD
         end
     end
 
-    subgraph Data Warehouse (MySQL)
+    subgraph "Data Warehouse (MySQL)"
         DB[(walmart_dw / salarkhan)]
     end
 
