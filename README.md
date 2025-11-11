@@ -34,14 +34,14 @@ graph TD
         PM[product_master_data.csv]
     end
 
-    subgraph ETL Engine (main.py)
+    subgraph "ETL Engine (main.py)"
         direction TB
         subgraph Extraction
             Prod[Producer Thread]
             Queue[Stream Buffer Queue]
         end
 
-        subgraph Transformation (HYBRIDJOIN)
+        subgraph "Transformation (HYBRIDJOIN)"
             HT[In-Memory Hash Table]
             FIFO[FIFO Queue]
             Join[Join Engine]
@@ -141,8 +141,8 @@ HYBRIDJOIN is an advanced algorithm tailored for joining a fast-paced data strea
 
 1. **Pre-loading & Partitioning**:
    - Product master data is cached in a quick O(1) hash map (`product_lookup`).
-   - Customer master data is partitioned into $VP$ (default: 2000) buckets using a hash-modulo function:
-     $$\text{bucket\_id} = \text{Customer\_ID} \pmod{VP}$$
+   - Customer master data is partitioned into `VP` (default: 2000) buckets using a hash-modulo function:
+     `bucket_id = Customer_ID % VP`
      This structure represents disk partitions held in memory structure.
 2. **Stream Buffering**:
    - The **Producer Thread** pushes incoming transaction rows to the `stream_buffer` queue.
